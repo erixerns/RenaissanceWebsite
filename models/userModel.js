@@ -25,5 +25,4 @@ userSchema.plugin(passportLocalMongoose);
 //   username: String,
 //   password: String
 // });
-userSchema.plugin(passportLocalMongoose);
 module.exports = mongoose.model('user', userSchema);

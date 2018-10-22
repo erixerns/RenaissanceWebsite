@@ -35,19 +35,15 @@
 
 <body>
 	<!-- Navbar -->
+	
 	<% include partials/navbar %>
 
 	<!-- Home -->
 	<% include frontPart/carousel %>
 	<!-- Countdown -->
 	<div class="separation"></div>
-	<section class="landing">
-		<div class="landing-inner">
-			<p class="landing-text">A platform for budding enterpreuners</p>
-			<h1 class="landing-inner-text">Coming Soon</h1>
-			<div class="countdown"></div>
-		</div>
-	</section>
+	<% include partials/Countdown %>
+	
 	<!-- About -->
 	<div class="seperation"></div>
 	<% include frontPart/about %>
@@ -94,7 +90,7 @@
 	<% include partials/footer %>
 
 </body>
-<script src="js/count_script.js"></script>
+
 
 </html>
 

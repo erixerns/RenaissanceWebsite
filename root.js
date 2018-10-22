@@ -3,7 +3,7 @@ var express = require("express");
 var router = express.Router();
 var Event = require("./models/eventModel");
 var passport = require('passport');
-
+var Feedback = require("./models/feedbackModel");
 var Team = require("./models/teamModel");
 
 //! Debug only
@@ -127,13 +127,15 @@ router.post("/feedback", function(req, res){
 		feedbackText: message
 	};
 
+	
+
 	Feedback.create(newfeedback, function(err, feedback){
 		if(err){
 			console.log(err);
 			res.send("ERROR: Feedback could not be submitted");
 		}
 		else{
-			console.log(newfeedback);
+			console.log(feedback);
 			res.send("SUCCESS");
 		}
 	});

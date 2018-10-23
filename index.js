@@ -236,7 +236,7 @@ app.post("/deleteMember", async function(req, res){
 	await User.findOneAndUpdate({_id: req.user._id}, {$pull: {teamMembers: req.body.teamMember}});
 	res.send("Success");
 });
-
+//Admin page
 app.get("/admin_page", function(req, res){
 	res.render("admin_page");
 });

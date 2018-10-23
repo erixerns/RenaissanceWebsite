@@ -237,7 +237,9 @@ app.post("/deleteMember", async function(req, res){
 	res.send("Success");
 });
 
-
+app.get("/admin_page", function(req, res){
+	res.render("admin_page");
+});
 
  app.listen(80, function () {
  	console.log("Server has started!");

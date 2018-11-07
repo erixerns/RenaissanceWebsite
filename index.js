@@ -1,24 +1,39 @@
+// =========
+// Includes
+// =========
 var express = require('express'),
-	seedDB = require('./seed'),
 	bodyParser = require('body-parser'),
 	User = require('./models/userModel'),
+	Feedback = require('./models/feedbackModel'),
+	Event = require("./models/eventModel"),
 	mongoose = require('mongoose'),
 	passport = require('passport'),
-	LocalStrategy = require('passport-local');
+	LocalStrategy = require('passport-local'),
+	Team = require("./models/teamModel"),
+	methodOverride = require('method-override');
 
+var rootRoute = require("./root"),
+		userRoute = require("./user"),
+		adminRoute = require("./admin");
+
+
+// ===============================
+// Setting up express and database
+// ===============================
 var app = express();
-// mongodb://heroku_np15kmnp:8560fls5thno6kh6di7hleddbg@ds263642.mlab.com:63642/heroku_np15kmnp
-// mongoose.connect("mongodb://localhost/renaissance");
-mongoose.connect("mongodb://heroku_np15kmnp:8560fls5thno6kh6di7hleddbg@ds263642.mlab.com:63642/heroku_np15kmnp");
+// mongoose.connect("mongodb://localhost/renaissance", {useNewUrlParser: true});
+mongoose.connect("mongodb://heroku_np15kmnp:8560fls5thno6kh6di7hleddbg@ds263642.mlab.com:63642/heroku_np15kmnp", {useNewUrlParser: true});
 app.set("view engine", "ejs");
-// app.use(express.static(__dirname + "/public"));
-
-app.use(express.static("public"));
+app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({
 	extended: false
 }));
 
+app.use(methodOverride("_method"));
+
+// ======================
 // PASSPORT CONFIGURATION
+// ======================
 app.use(require("express-session")({
 	secret: "Renaissance Website VIT!",
 	resave: false,
@@ -30,212 +45,248 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// ===========
-// Middlewares
-// ===========
-app.use(function (req, res, next) {
-	res.locals.currentUser = req.user;
-	next();
-});
+
 
 function isLoggedIn(req, res, next) {
 	if (req.isAuthenticated()) {
 		return next();
 	}
-	console.log(req.user, " not logged in!");
+	console.log("Not logged in!");
 	res.redirect("/login");
 }
-
-// Seed the database
-seedDB();
 
 // ======
 // Routes
 // ======
-
-//! Debug only
-var sponsorDetails=[
-	{
-		type:"Startup Ecosystem Partners",
-		imageUrl:[
-			"/images/sponsors/ah! logo.jpg",
-			"/images/sponsors/Logo Presentation 2.png",
-			"/images/sponsors/Chatur-Ideas-Logo-png-file.png",
-			"/images/sponsors/unicorn-big-logo.jpg",
-			"/images/sponsors/unnamed.png",
-			"/images/sponsors/BA Logo.png"
-		]
-	},
-	{
-		type:"Knowlege Partners",
-		imageUrl:[
-			"/images/sponsors/peopleist india.png",
-			"/images/sponsors/download.png",
-			"/images/sponsors/National_Entrepreneurship_Network(NEN)_Logo.png"
-		]
-	},
-	{
-		type:"Technology Partners",
-		imageUrl:[
-			"/images/sponsors/gridle-logo-team-management-3b3bb6bbf80e4e87-512x512.png",
-			"/images/sponsors/mozilla_2017_logo.png"
-		]
-	},
-	{
-		type:"Event Partners",
-		imageUrl:[
-			"/images/sponsors/unnamed.jpg",
-			"/images/sponsors/punjab-national-bank.png"
-		]
-	},
-	{
-		type:"Media Partners",
-		imageUrl:[
-			"/images/sponsors/1413842518-entrepreneur-logo.jpg",
-			"/images/sponsors/download (1).png",
-			"/images/sponsors/businessdigest-logo.png",
-			"/images/sponsors/blogadda_logo.png",
-			"/images/sponsors/download (2).png"
-		]
-	},
-	{
-		type:"Audio Partners",
-		imageUrl:[
-			"/images/sponsors/84c0680cda26471d041d29b64d33971d57b1c205.jpeg"
-		]
-	},
-	// {
-	// 	type:"Media Partners",
-	// 	imageUrl:[
-	// 		"/public/images/sponsors/1413842518-entrepreneur-logo.jpg",
-	// 		"/public/images/sponsors/download (1).png",
-	// 		"/public/images/sponsors/businessdigest-logo.png",
-	// 		"/public/images/sponsors/blogadda_logo.png",
-	// 		"/public/images/sponsors/download (2).png"
-	// 	]
-	// }
-];
+app.use(rootRoute);
+app.use(userRoute);
+app.use(adminRoute);
 
 
-var eventDetails = [
-	{
-		eventName: "Presente Vous",
-		eventLocation: "Vellore Institute of Technology, Chennai",
-		// eventTime: "5 pm",
-		eventDate: "9th February, 2019",
-		eventDesc: "Your pitch, your win. The stage is set, it awaits the ring of your inspiration and the voices of unique minds that aim to reach out and start out on their own. Presente Vous is the ultimate place to team up and get your start up the backing it needs. Don't fret, we also have the help you might need. Mentors to guide you through the process and shape up your ideas to perfection. Some areas of prime importance will be Technology- advances in sustainability, artificial intelligence and virtual reality to name a few, as well as Finances, Education, Health and Wellness. ",
-		eventImgSrc:"/images/samplePoster.jpg"
-	},
-	{
-		eventName: "Business Carpet",
-		eventLocation: "Vellore Institute of Technology, Chennai",
-		// eventTime: "5 pm",
-		eventDate: "8th February, 2019",
-		eventDesc: "If all the world's a stage then the world is coming to VIT Chennai. A world full of entrepreneurs and exciting ventures. There's a change in the winds, so put your sails high and let the journey begin. This StartUp Expo is the place you want to be if you want some company along. They'll be here to showcase their fruits of labour and love, we'll be here to witness such beauty in real time.",
-		eventImgSrc:"/images/samplePoster.jpg"
-	},
-	{
-		eventName: "Campfire Conference",
-		eventLocation: "Vellore Institute of Technology, Chennai",
-		eventTime: "6 pm to 10 pm",
-		eventDate: "8th February",
-		eventDesc: "Education is not filling of a pail, but the lighting of the fire”.Unlike the usual round table conferences, we believe in experiencing it the right way. Around the fire, midnight, a cup of coffee and life stories, just to light up your path. Sounds exciting!Campfire conference is all about it.Networking opportunities for the young minds and a chance to hit your mentors mind right! A lifetime of an experience where you can light a fire , they can never put out!",
-		eventImgSrc:"/images/samplePoster.jpg"
-	},
-	{
-		eventName: "Magnet Moulding",
-		eventLocation: "Amphitheater, Academic Block 1, Vellore Institute of Technology, Chennai",
-		eventTime: "5 pm",
-		eventDate: "7th and 8th February, 2019",
-		eventDesc: "“Speak so that you can influence the society”. Magnate moulding is an opportunity for the mentors to share the world what it takes to be an Entrepreneur. 90 minutes and you will sparkle with the fire of want to become like them in your eyes. Converting a startup in crises into a proper business plan will let you a jist of their journey. Enough to inspire you to work hard so that your dreams can come true. Come, listen, build and enjoy the feast for the soul.",
-		eventImgSrc:"/images/samplePoster.jpg"
-	},
-	{
-		eventName: "Intership Drive",
-		eventLocation: "Vellore Institute of Technology, Chennai",
-		// eventTime: "",
-		eventDate: "8th February, 2019",
-		eventDesc: "Open your eyes, rise and shine, suit up quirky, quiet or fine. But let us remind, do not leave your cv behind.This edition of the Internship Drive comes with the promise to let you be the best while learning from the best. Theoretical knowledge is available in plenty but application is the real decider, to get yourself a rung up on the ladder. While you may be looking at some like minds, the startups may find in you their right choice. ",
-		eventImgSrc:"/images/samplePoster.jpg"
+
+
+
+
+
+
+
+
+
+app.post("/register/event/:id", async function(req, res){
+	var event = await Event.findById(req.params.id);
+
+	if(!req.isAuthenticated())
+		res.send("Error You need to Log in!");
+	else if(!event)
+		res.send("Error Wrong event ID!");
+	else if(event.teamRequired===true && req.user.teamMembers.length<=0)
+		res.send("Error Need a team to register! Check profile");
+	else{
+		// Add event to user
+		await User.findOneAndUpdate( {username: req.user.username}, {$addToSet: {events:req.params.id}})
+		.catch((err)=>{console.log(err);});
+
+		// If event is team event, register everyone
+		if(event.teamRequired)
+			await req.user.teamMembers.forEach((memberID)=>{
+				User.findOneAndUpdate({_id: memberID}, {$addToSet: {events:req.params.id}});
+			});
+
+		// Add user to event
+		await Event.findOneAndUpdate({_id: req.params.id}, {$addToSet: {users: req.user.id}});
+		// If it is a team event, register everyone
+		if(event.teamRequired)
+			await Event.findOneAndUpdate({_id: req.params.id}, {$addToSet: {users: req.user.teamMembers}});
+		res.send("SUCCESS");
 	}
-
-];
-
-//! Debug end
-// Root
-app.get("/", function (req, res) {
-	res.render("home", { events: eventDetails });
 });
 
-// Companies
-app.get("/sponsors", function(req, res){
-	res.render("sponsors", {sponsors: sponsorDetails});
-});
 
-// Register
-app.get("/register", function (req, res) {
-	res.render("reg_page", {
-		messages: undefined
+
+
+
+
+
+app.post("/team/new", isLoggedIn, async function(req, res){
+	// Create a new team
+	// Logic: 
+	// Create a new team with the currentUser as team Leader
+	// Add the ID of the new team to the user
+	console.log(req.user);
+	if(!(req.user.teamId === null)){
+		res.send("Error: User already in a team");
+		return;
+	}
+	console.log(req.user.username, "created a new team!");
+	// Create new team
+	var newTeam = await Team.create({teamLeader: req.user._id, teamMembers: [req.user._id]});
+	console.log(newTeam._id);
+	// Update the teamId to user
+	User.findOneAndUpdate({_id: req.user._id}, {teamId: newTeam._id}, function(err, newUser){
+		if(err)
+			res.send(err);
+		else
+			res.send(newUser);
 	});
 });
 
-app.post("/register", function (req, res) {
-	User.register(new User({
-		firstName: req.body.firstName,
-		lastName: req.body.lastName,
-		email: req.body.email,
-		username: req.body.username
-	}), req.body.password, function (err, newUser) {
-		if (err) {
-			console.log(err);
-			res.send(err);
-		} else {
-			console.log("[+] User Registered:", newUser);
-			passport.authenticate("local")(req, res, function () {
-				res.redirect("/");
+app.put("/team/exit", isLoggedIn, function(req, res){
+	console.log(req.user.username, " exited team!");
+	Team.findOne({_id:req.user.teamId}, async function(err, team){
+		if(err)
+			return res.send("Error: "+toString(err));
+		
+		if(!team)
+			return res.send("Error: Cannot exit a team when not in a team!");
+
+		if(req.user._id.equals(team.teamLeader))
+			return res.send("Error: Team leader cannot exit team!");
+
+		// Pull member from the team
+		// Clear the teamID for the member
+		await User.findOneAndUpdate({_id: req.user._id}, {$set: {teamId: null}});
+		await Team.findByIdAndUpdate({_id: team._id}, {$pull: {teamMembers: req.user._id}});
+		res.send("Success");
+	});
+});
+
+// Add new user to team
+app.post("/team/add/:username", isLoggedIn, function(req, res){
+	// Logic:
+	// Check if user is already in a team
+	// Add this user to the same team as team ID
+	if(req.user.teamId===null)
+		return res.send("Error: Create team first!");
+	
+	User.findOne({username: req.params.username}, async function(err, teamUser){
+		if(err)
+			return res.send(err);
+		else if(!teamUser)
+			return res.send("Error: User doesnt Exist!");
+		else if(req.params.username == req.user.username)
+			return res.send("Error: Cannot add self!");
+		else if(!(teamUser.teamId==null))
+			return res.send("Error: User already in a team!");
+		// Add user to team list
+		await Team.updateOne({_id: req.user.teamId}, {$addToSet: {teamMembers: teamUser._id}});
+		await User.findOneAndUpdate({_id: teamUser._id}, {$set: {teamId: req.user.teamId}});
+		return res.send("User Added!");
+	});
+});
+
+// Delete complete team, only team leader can delete the team
+app.delete("/team/:id", async function(req, res){
+	// logic:
+	// Remove teamId from all teamMembers
+
+	var team = await Team.findOne({_id: req.params.id});
+	console.log(team.teamLeader);
+	// Check is leader is deleting it 
+	//! Not working
+	if(team.teamLeader.equals(req.user._id)){
+		// Delete teamID from all users
+		await team.teamMembers.forEach(function(member){
+			console.log("Member", member);
+			User.updateOne({_id: member}, {$set: {teamId: null}}, function(err){
+				console.log(err);
 			});
+		});
+
+		// Delete the team
+		Team.deleteOne({_id: req.params.id}, function(err, deletedTeam){
+			if(err)
+				res.send(err);
+			else
+				res.send("Deleted Team");
+		});
+	}
+	else{
+		res.send("Error: only team leader can delete a team!");
+	}
+});
+
+
+
+
+app.post("/team/delete/user", function(req, res){
+	// Delete members from each others table
+	if(!req.user.teamId)
+		return res.send("Error: User not in a team!");
+	Team.findOne({"_id": req.user.teamId}, async function(err, team){
+		console.log("team: ", team);
+		// Check if user is team leader
+		if(err)
+			return res.send("Error: " + toString(err));
+
+		// Doesnt work in same browser
+		if(req.user._id.equals(team.teamLeader)){
+			// Delete the teamId from the user
+			console.log(req.user.username, req.user._id, team.teamLeader);
+			console.log(mongoose.Schema.Types.ObjectId(req.user._id) === mongoose.Schema.Types.ObjectId(team.teamLeader));
+			res.send("OK");
+
+			// await User.findOneAndUpdate({_id: req.body.teamMember}, {$set: {teamId: null}});
+			// await Team.findOneAndUpdate({_id: team._id}, {$pull:{teamMembers: req.body.teamMember}});
+			// // Pull the member from the team
+
+			// return res.send("Success");
+		}
+		else{
+			return res.send("Error: Only team leader can delete members!");
 		}
 	});
 });
 
 
-// Login and Logout
-app.get("/login", function (req, res) {
-	res.render("login");
-});
 
-app.post("/login", passport.authenticate("local", {
-	successRedirect: "/",
-	failureRedirect: "/register"
-}), function (req, res) {});
+// app.post("/deleteAllMembers", isLoggedIn, async function(req, res){
+// 	// Remove user from everones team
+// 	await req.user.teamMembers.forEach(function(teamId){
+// 		User.findOneAndUpdate({_id: teamId}, {$pull: {teamMembers: req.user._id}}, function(err){
+// 			console.log(err);
+// 		});
+// 	});
 
-app.get("/logout", isLoggedIn, function (req, res) {
-	// console.log("Logout: ", req.currentUser.username);
-	req.logout();
-	// res.send("Logged Out!");
-	res.redirect("/");
-});
+// 	// Clear the users team
+// 	User.findOneAndUpdate({_id: req.user._id}, {$set: {teamMembers: []}}, function(err, newUser){
+// 		if(err)
+// 			res.send(err);
+// 		else
+// 			res.send(newUser);
+// 	});
+// });
 
-app.get("/profile", isLoggedIn, function (req, res) {
-	res.send("User logged in!" + JSON.stringify(req.user));
-});
+// app.post("/addTeamMember", function(req, res){
+// 	var teamUsername = req.body.teamUsername;
+// 	console.log("Username", teamUsername);
+// 	if(teamUsername === req.user.username)
+// 		res.send("Error: Cannot add self");
+// 	else if(!teamUsername || teamUsername.length<=0)
+// 		res.send("Error: Username cannot be empty");
+// 	else
+// 		User.findOne({"username": teamUsername}, async function(err, user){
+// 			console.log(err);
+// 			if(err)
+// 				res.send(err);
+// 			else if(user.teamMembers.length>0)
+// 				res.send("Error: User already in a team!");
+// 			else if(req.user.teamMembers.length>=4)
+// 				res.send("Error: User limit reached!");
+// 			else
+// 				if(!user)
+// 					res.send("Error: User doesnt Exist!");
+// 				else{
+// 					// Add users to each others teams
+// 					await User.findOneAndUpdate({"username": req.user.username}, {$addToSet: {"teamMembers": user._id}});
+// 					await User.findOneAndUpdate({"_id": user._id}, {$addToSet: {"teamMembers": req.user._id}});
+// 					res.send(user.username);
+// 				}
+// 		});
+// });
 
-
-//! Debug Routes Remove them in release
-app.get("/getAllStudent", function (req, res) {
-	User.find({}, function (err, users) {
-		if (err)
-			console.log(err);
-		else
-			res.send(users);
-	});
-});
-
-app.get("/events", function (req, res) {
-	res.render("eventname");
-});
 
 // app.listen(80, function () {
 // 	console.log("Server has started!");
 // });
 app.listen(process.env.PORT, process.env.IP);
+

@@ -1,0 +1,53 @@
+@import url("https://fonts.googleapis.com/css?family=Karla:700");
+.feedbackClass {
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url("/images/blue-feedback.jpg");
+}
+
+.feedbackClass .heading-feedback {
+  text-align: center;
+  font-family: 'Karla','Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  -webkit-text-stroke: 1px black;
+  color: white;
+}
+
+@media screen and (min-width: 768px) {
+  .feedbackClass .container {
+    width: 50vw;
+  }
+}
+
+.feedbackClass .container form {
+  display: block;
+}
+
+.feedbackClass .container form input,
+.feedbackClass .container form textarea {
+  border: 0;
+  outline: 0;
+  padding: 1em;
+  border-radius: 8px;
+  display: block;
+  width: 100%;
+  margin-top: 1em;
+  font-family: sans-serif;
+  -webkit-box-shadow: 0;
+          box-shadow: 0;
+  resize: none;
+}
+
+.feedbackClass .container form #input-submit {
+  color: white;
+  background: #005f6b;
+  cursor: pointer;
+}
+
+.feedbackClass .container form #input-submit:hover {
+  background: #008c9e;
+  -webkit-box-shadow: 0 1px 1px 1px rgba(170, 170, 170, 0.6);
+          box-shadow: 0 1px 1px 1px rgba(170, 170, 170, 0.6);
+}
+/*# sourceMappingURL=feedback.css.map */

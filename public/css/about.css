@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css?family=Karla:700");
+.aboutClass {
+  scroll-snap-align: start;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url("/images/about1.jpg");
+  min-height: 90vh;
+}
+
+.aboutClass .info-card {
+  opacity: 1;
+  position: relative;
+  top: 5vh;
+  margin-bottom: 5vh;
+}
+
+.aboutClass .info-card .card-logo {
+  opacity: 1;
+  background: #008C9E;
+  min-height: 15vh;
+}
+
+.aboutClass .info-card .card-logo h1 {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  color: white;
+  font-size: 2rem;
+  text-align: center;
+  display: block;
+  font-family: 'Karla','Times New Roman', Times, serif;
+  text-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2), 10px 10px 15px rgba(0, 0, 0, 0.1), 10px 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.aboutClass .info-card .card-text {
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+}
+/*# sourceMappingURL=about.css.map */

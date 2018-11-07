@@ -12,26 +12,35 @@
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/bootstrap.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/scrollbar.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/reg_style.css" />
+	<script src = "/lib/jquery.min.js"></script>
+	<script src = "/js/bootstrap.js"></script>
 
 </head>
-
 
 <body>
 	<% include partials/navbar %>
 	<h1>Renaissance</h1>
+<<<<<<< HEAD
 	<div class="details">Register Here</div>
+=======
+	<!-- <div class="details">Register Here</div> -->
+>>>>>>> 2474b2c770da0e60892dc335b56a0a1844f6f105
 	<!-- <div class="details">Here</div> -->
-	<form method="POST" action="/register">
+	<!-- Chage action to '' ? -->
+	<form method="POST" action="/user/register">
 		<div class="col">
 			<div class="minput">
 				<input type="text" id="fname" dir="auto" name="firstName" required>
 				<span class="bar"></span>
 				<label>First Name</label>
+				<div id = "error-fname"></div>
 			</div>
+
 			<div class="minput">
 				<input type="text" id="lname" dir="auto" name="lastName" required>
 				<span class="bar"></span>
 				<label>Last Name</label>
+				<div id = "error-lname"></div>
 			</div>
 
 			<!-- We are not storing age into database yet -->
@@ -39,6 +48,7 @@
 				<input type="number" id="age" dir="auto" required>
 				<span class="bar"></span>
 				<label>Age</label>
+				<div id = "error-age"></div>
 			</div>
 			<!-- We are not storing gender into database yet -->
 			<div class="control-group">
@@ -52,9 +62,13 @@
 					<div class="control__indicator"></div>
 				</label>
 			</div>
-
-			<!-- Change this to checkbox -->
 			<div class="minput">
+				<input type="text" id="phno" dir="auto" name="phone" required>
+				<span class="bar"></span>
+				<label>Phone number</label>
+				<div id = "error-phno"></div>
+			</div>
+			<!-- <div class="minput">
 				<div class="select">
 					<select id="pays">
 						<option value="">-- Department --</option>
@@ -64,7 +78,7 @@
 					</select>
 					<div class="select__arrow"></div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 
 		<div class="col">
@@ -73,24 +87,28 @@
 
 				<span class="bar"></span>
 				<label>Username</label>
+				<div id = "error-pseudo"></div>
 			</div>
 
 			<div class="minput">
 				<input type="email" id="email" dir="ltr" class="" name="email" required>
 				<span class="bar"></span>
 				<label>Email</label>
+				<div id = "error-email"></div>
 			</div>
 
 			<div class="minput">
 				<input type="password" id="password" dir="auto" required>
 				<span class="bar"></span>
 				<label>Password</label>
+				<div id = "error-pass"></div>
 			</div>
 
 			<div class="minput">
 				<input type="password" id="passwordConf" name="password" required>
 				<span class="bar"></span>
 				<label>Retype Password</label>
+				<div id = "error-conf"></div>
 			</div>
 			<div class="control-group">
 
@@ -101,7 +119,7 @@
 			</div>
 
 			<div class="minput">
-				<span id="valid" style="margin-bottom: 5px;">Valid fields : 1/10</span>
+				<!-- <span id="valid" style="margin-bottom: 5px;"></span> -->
 
 				<input type="submit" id="send" value="Submit" disabled="true" style="padding:5px;padding-top:7px;">
 			</div>

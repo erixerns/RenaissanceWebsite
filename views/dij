@@ -1,0 +1,17 @@
+Enter the starting node:: 0
+
+Distance of 1 = 10
+Path = 1 <-0
+Distance of 2 = 20
+Path = 2 <-3 <-0
+Distance of 3 = 5
+Path = 3 <-0
+Distance of 4 = 9999
+Path = 4 <-0
+Distance of 5 = 28
+Path = 5 <-2 <-3 <-0
+Distance of 6 = 25
+Path = 6 <-2 <-3 <-0
+Distance of 7 = 25
+Path = 7 <-2 <-3 <-0
+Minimun cost: 7

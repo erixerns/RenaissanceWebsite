@@ -1,103 +1,63 @@
-.people{
-    background-attachment: fixed;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-image: url("/images/preEventBack.jpg");
-    padding: 5px;
-    
-  .card-deck{
-    width: 50%;
-    height: 70vh;
-    
-      margin: 0 auto; /* Added */
-      float: none; /* Added */
-      margin-bottom: 10px; 
-    
-  }
-.wrapper {
-    padding: 80px;
-  }
-  
-  .image--cover {
-    width: 20vh;
-    height: 20vh;
-    border-radius: 50%;
-    margin: 10px;
-  
-    object-fit: cover;
-    object-position: center right;
-  }
+@import url('https://fonts.googleapis.com/css?family=Karla:700');
+.picture {
+  font-family: 'Karla','Open Sans', Arial, sans-serif;
+  position: relative;
+  display: inline-block;
+  margin: 40px 8px;
+  min-width: 230px;
+  max-width: 315px;
+  width: 100%;
+  color: #000;
+  text-align: left;
+  font-size: 16px;
+  background: #fff;
+  border-radius: 5px;
 }
 
 
 
-.heading-feedback {
-   text-align: center;
-   color: #a8a8a8;
-  text-shadow: 1px 1px 0 rgb(126, 126, 126);
+.picture img {
+  max-width: 35%;
+  margin-top: -15px;
+  margin-left: 60%;
+  margin-bottom: 15px;
+  backface-visibility: hidden;
+  vertical-align: top;
+  border-radius: 5px;
 }
 
-form {
-   max-width: 600px;
-   text-align: center;
-   margin: 0 auto; /* Added */
-      float: none; /* Added */
-      margin-bottom: 10px;
-  
-  input, textarea {
-     border:0; outline:0;
-     padding: 1em;
-    border-radius: 8px;
-     display: block;
-     width: 100%;
-     margin-top: 1em;
-     font-family:  sans-serif;
-      box-shadow: 0 ;
-     resize: none;
-    
-    
-  }
-  
-  #input-submit {
-     color: white; 
-     background: red;
-     cursor: pointer;
-    
-    &:hover {
-
-      box-shadow: 0 1px 1px 1px rgba($color: #aaa, $alpha : 0.6)
-    }
-  }
-  
-  textarea {
-      height: 126px;
-  }
+.picture figcaption {
+  position: absolute;
+  top: 0;
+  right: 40%;
+  left: 0;
+  bottom: 0;
+  padding: 15px;
 }
 
-
-.half {
-  float: left;
-  width: 48%;
-  margin-bottom: 1em;
+.picture h3 {
+  margin: 0;
+  font-size: 1.1em;
+  font-weight: normal;
 }
 
-.right { width: 50%; }
-
-.left {
-     margin-right: 2%; 
+.picture .icons {
+  font-size: 1.6rem;
 }
 
-
-
-
-/* Clearfix */
-.cf:before,
-.cf:after {
-    content: " "; /* 1 */
-    display: table; /* 2 */
+.picture .icons a {
+  color: #ccc;
 }
 
-.cf:after {
-    clear: both;
+.picture .icons a:hover {
+  color: #2980b9;
+}
+
+.contact{
+  background-color: #212121;
+  text-align: center;
+}
+
+.picture p{
+  font-size: 1rem;
 }

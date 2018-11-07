@@ -11,32 +11,36 @@
 	<link rel="stylesheet" type="text/css" media="screen" href="css/scrollbar.css" />
 
 <body>
-
-<div class="form-structor">
-	<div class="signup">
-		<h2 class="form-title" id="signup"><span>or</span>Company Login</h2>
+<% include partials/navbar %>
+<div class="form-structor mt-4">
+<!-- TODO: Change the classes to login -->
+	<form class="signup" method="POST" action="/login">
+		<h2 class="form-title" id="signup"><span>or</span>Log in</h2>
 		<div class="form-holder">
-			<input type="text" class="input" placeholder="Name" />
-			<input type="email" class="input" placeholder="Email" />
-			<input type="password" class="input" placeholder="Password" />
+			<input type="text" class="input" placeholder="Username" name="username"/>
+			<input type="password" class="input" placeholder="Password" name="password"/>
 		</div>
-		<button class="submit-btn">Company Login</button>
-	</div>
+		<button class="submit-btn" type="submit">Log in</button>
+	</form>
 	<div class="login slide-up">
 		<div class="center">
-			<h2 class="form-title" id="login"><span>or</span>Log in</h2>
+			<h2 class="form-title" id="login"><span>or</span>Register</h2>
 			<div class="form-holder">
-				<form action="/login" method="POST">
+				<form action="/user/register" method="GET">
 					<!-- <input type="email" class="input" placeholder="Email" /> -->
-					<input type="text" class="input" placeholder="Username" name="username" />
-					<input type="password" class="input" placeholder="Password" name="password"/>
-					<button type="submit" class="submit-btn">Log in</button>
+					<!-- <input type="text" class="input" placeholder="Username" name="username" />
+					<input type="password" class="input" placeholder="Password" name="password"/> -->
+					<button type="submit" class="submit-btn">Register</button>
 				</form>
 			</div>
 			
 		</div>
 	</div>
 </div>
+
+<script src = "/lib/jquery.min.js"></script>
 <script src = "/js/login_script.js"></script>
+<script src = "/js/bootstrap.js"></script>
+
 </body>
 </html>

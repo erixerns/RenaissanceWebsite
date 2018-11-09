@@ -1,0 +1,71 @@
+<html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="event.css">
+<body>
+  <div class="row">
+    <div class="col-sm-3 description" style="float:left;">
+      <h3><u class="success">DESCRIPTION</u></h3><br>
+       <p>Trees play a significant role in reducing erosion and moderating the climate. They remove carbon dioxide from the atmosphere and store large quantities of carbon in their tissues. Trees and forests provide a habitat for many species of animals and plants. Tropical rainforests are among the most biodiverse habitats in the world. Trees provide shade and shelter, timber for construction, fuel for cooking and heating, and fruit for food as well as having many other uses. In parts of the world, forests are shrinking as trees are cleared to increase the amount of land available for agriculture. Because of their longevity and usefulness, trees have always been revered, with sacred groves in various cultures, and they play a role in many of the world's mythologies</p><br>
+       <img src="public\images\p1.jpg">
+       <img src="public\images\p1.jpg" class="im2"><br>
+       <span>COORDINATOR1</span>
+       <span class="sp2">COORDINATOR2</span>
+    </div>
+    <div class="col-sm-9 count">
+	<h1>EVENT NAME</h1>
+  <h2>7th FEBRUARY 2018</h2>
+<div id="timer">
+  <span id="days"></span>days
+  <span id="hours"></span>hours
+  <span id="minutes"></span>minutes
+  <span id="seconds"></span>seconds
+</div>
+<button class="btn btn-info">REGISTER</button>
+</div>
+</div>
+</body>
+<script>
+function countdown(endDate) {
+  let days, hours, minutes, seconds;
+  
+  endDate = new Date(endDate).getTime();
+  
+  if (isNaN(endDate)) {
+  return;
+  }
+  
+  setInterval(calculate, 1000);
+  
+  function calculate() {
+    let startDate = new Date();
+    startDate = startDate.getTime();
+    
+    let timeRemaining = parseInt((endDate - startDate) / 1000);
+    
+    if (timeRemaining >= 0) {
+      days = parseInt(timeRemaining / 86400);
+      timeRemaining = (timeRemaining % 86400);
+      
+      hours = parseInt(timeRemaining / 3600);
+      timeRemaining = (timeRemaining % 3600);
+      
+      minutes = parseInt(timeRemaining / 60);
+      timeRemaining = (timeRemaining % 60);
+      
+      seconds = parseInt(timeRemaining);
+      
+      document.getElementById("days").innerHTML = parseInt(days, 10);
+      document.getElementById("hours").innerHTML = ("0" + hours).slice(-2);
+      document.getElementById("minutes").innerHTML = ("0" + minutes).slice(-2);
+      document.getElementById("seconds").innerHTML = ("0" + seconds).slice(-2);
+    } else {
+      return;
+    }
+  }
+}
+
+(function () { 
+  countdown('02/7/2019 00:00:00 PM'); 
+}());
+</script>
+</html>

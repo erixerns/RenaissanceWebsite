@@ -1,0 +1,66 @@
+body 
+{
+  background: #f5f5f5;
+}
+#timer {
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+  color: #999;
+  letter-spacing: -1px;
+
+}
+#timer span {
+  font-size: 60px;
+  color: #333;
+  border-right-width: 3%;
+  border-right-color: black;
+ 
+}
+.count
+{
+    padding-left:27%;
+    padding-top: 13%;
+    height:100%;
+    list-style-type:none;
+    font-weight: bold;
+    color:black;
+    background-color:rgb(0,250,30);
+}
+img
+{
+  width:80px;
+  height:90px;
+  margin-left: 13px;
+}
+.im2
+{
+  margin-left: 50px;
+}
+.sp2
+{
+  margin-left:23px;
+}
+h1
+{
+  margin-left: 14%;
+}
+h2
+{
+  margin-left: 11%;
+}
+h3
+{
+margin-left:49px;
+padding-top:14px;
+}
+.description
+{ 
+  background-color: rgba(0,0,0,0.7);
+  color:#81d4fa;
+  height:100%;
+}
+.btn
+{
+  margin-left:24%;
+  margin-top:30px;
+}

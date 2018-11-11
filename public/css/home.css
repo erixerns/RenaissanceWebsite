@@ -26,15 +26,15 @@ html {
 }
 
 .home {
-  height: 90vh;
+  height: 90%;
 }
 
 .home .heading .carousel-inner .carousel-item {
-  height: 90vh;
+  height: 90%;
 }
 
 .home .heading .carousel-inner .carousel-item .carousel-img {
-  width: 20vw;
+  width: 20%;
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
@@ -54,20 +54,22 @@ html {
 
 @media screen and (max-width: 992px) {
   .home .heading .carousel-inner .carousel-item .mainLogo {
-    height: 30vh;
+    height: 30%;
+    width: 100%
   }
   .home .heading .carousel-inner .carousel-item .mainLogo .logoImage {
-    max-width: 700px;
+    max-width: 600px;
   }
 }
 
-/* On screens that are 600px or less, set the background color to olive */
-@media screen and (max-width: 600px) {
+/*Not Showing Logo*/
+@media screen and (max-width: 500px) {
   .home .heading .carousel-inner .carousel-item .mainLogo {
-    height: 30vh;
+    height: 30%;
+    width: 100%
   }
   .home .heading .carousel-inner .carousel-item .mainLogo .logoImage {
-    max-width: 700px;
+    max-width: 600px;
   }
 }
 /*# sourceMappingURL=home.css.map */

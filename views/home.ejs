@@ -7,6 +7,12 @@
 	<title>Renaissance</title>
 	<meta name="google-site-verification" content="bcPE7I5x02j0ce8_qICY_EX6nOw5IE6bEpkWUbKuNE8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+	<script src="/lib/jquery.min.js"></script>
+	<script src="/js/bootstrap.js"></script>
+
+
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 
@@ -27,10 +33,6 @@
 	<link rel="stylesheet" href="/css/mainEvents.css" />
 	<link rel="stylesheet" href="/css/styleEve.css">
 
-
-	<script src="/lib/jquery.min.js"></script>
-	<script src="/js/bootstrap.js"></script>
-	
 
 </head>
 
@@ -109,28 +111,30 @@
 	<script src="/js/landingPage.js"></script>
 
 	<script>
-
-		$('body').scroll(function () {
-			var $nav = $(".navbar-fixed-top");
-			$nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
-		});
+		jQuery(document).ready(function ($) {
 
 
-		$(document).ready(function () {
-			$('a[href^="#"]').on('click', function (e) {
-				e.preventDefault();
+			$('body').scroll(function () {
+				var $nav = $(".navbar-fixed-top");
+				$nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
+			});
 
-				var target = this.hash,
-					$target = $(target);
-				console.log($target.offset().top, $('body').scrollTop());
-				$('html, body').stop().animate({
-					'scrollTop': $target.offset().top + $('body').scrollTop() - 45
-				}, 900, 'swing', function () {
-					window.location.hash = target;
+
+			$(document).ready(function () {
+				$('a[href^="#"]').on('click', function (e) {
+					e.preventDefault();
+
+					var target = this.hash,
+						$target = $(target);
+					console.log($target.offset().top, $('body').scrollTop());
+					$('html, body').stop().animate({
+						'scrollTop': $target.offset().top + $('body').scrollTop() - 45
+					}, 900, 'swing', function () {
+						window.location.hash = target;
+					});
 				});
 			});
-		});
-
+		})
 	</script>
 	<script src="js/count_script.js"></script>
 </body>

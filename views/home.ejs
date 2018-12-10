@@ -34,6 +34,8 @@
 	<link rel="stylesheet" href="/css/styleEve.css">
 
 
+	<script src="/lib/jquery.min.js"></script>
+	<script src="/js/bootstrap.js"></script>
 </head>
 
 <body>
@@ -119,11 +121,9 @@
 				$nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
 			});
 
-
-			$(document).ready(function () {
-				$('a[href^="#"]').on('click', function (e) {
-					e.preventDefault();
-
+		$(document).ready(function () {
+			$('a[href^="#"]').on('click', function (e) {
+				e.preventDefault();
 					var target = this.hash,
 						$target = $(target);
 					console.log($target.offset().top, $('body').scrollTop());

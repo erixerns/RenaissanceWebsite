@@ -7,6 +7,12 @@
 	<title>Renaissance</title>
 	<meta name="google-site-verification" content="bcPE7I5x02j0ce8_qICY_EX6nOw5IE6bEpkWUbKuNE8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+	<script src="/lib/jquery.min.js"></script>
+	<script src="/js/bootstrap.js"></script>
+
+
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 
@@ -23,12 +29,10 @@
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/presente_style.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/navbar.css" />
 	<link rel="stylesheet" type="text/css" media="screen" href="/css/home.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/css/landingPage.css" />
 	<link rel="stylesheet" href="/css/mainEvents.css" />
 	<link rel="stylesheet" href="/css/styleEve.css">
 
-
-	<script src="/lib/jquery.min.js"></script>
-	<script src="/js/bootstrap.js"></script>
 
 </head>
 
@@ -39,6 +43,7 @@
 
 	<!-- Home -->
 	<% include frontPart/carousel %>
+
 
 	<!-- Countdown -->
 	<div class="separation"></div>
@@ -103,12 +108,16 @@
 	<div class="seperation"></div>
 	<% include partials/footer %>
 
+	<script src="/js/landingPage.js"></script>
+
 	<script>
-		
-		$('body').scroll(function () {
-			var $nav = $(".navbar-fixed-top");
-			$nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
-		});
+		jQuery(document).ready(function ($) {
+
+
+			$('body').scroll(function () {
+				var $nav = $(".navbar-fixed-top");
+				$nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
+			});
 
 
 			$(document).ready(function () {
@@ -117,7 +126,7 @@
 
 					var target = this.hash,
 						$target = $(target);
-						console.log($target.offset().top, $('body').scrollTop());
+					console.log($target.offset().top, $('body').scrollTop());
 					$('html, body').stop().animate({
 						'scrollTop': $target.offset().top + $('body').scrollTop() - 45
 					}, 900, 'swing', function () {
@@ -125,7 +134,7 @@
 					});
 				});
 			});
-			
+		})
 	</script>
 	<script src="js/count_script.js"></script>
 </body>

@@ -48,15 +48,15 @@ router.post('/forgot', function (req, res, next) {
       });
     },
     function (token, user, done) {
-      var smtpTransport = nodemailer.createTransport(smtpTransportNodemailer({
-        service: 'gmail',
-        // host:'smtp.gmail.com',
-        secure: false,
-        port: 587,
-        auth: {
-          user: 'tech.renaissance18@gmail.com',
-          pass: 'vit_cc_tech.'
-        },
+     var smtpTransport = nodemailer.createTransport({
+         service: 'zoho',
+          // host: 'smtp.zoho.eu',
+           secure:false,
+           port:3000,
+           auth: {
+             user: 'tech.renaissance18@zoho.com',
+             pass: 'U9zSZwfW6T:UB36'
+           },
         tls: {
           rejectUnauthorised: false
         }
@@ -66,7 +66,7 @@ router.post('/forgot', function (req, res, next) {
 
       var mailOptions = {
         to: user.email,
-        from: 'tech.renaissance18@gmail.com',
+        from: 'tech.renaissance18@zoho.com',
         subject: ' Password Reset',
         text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
           'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
@@ -127,20 +127,21 @@ router.post('/reset/:token', function (req, res) {
     },
     function (user, done) {
       var smtpTransport = nodemailer.createTransport({
-        service: 'gmail',
-        secure: false,
-        port: 3000,
-        auth: {
-          user: 'tech.renaissance18@gmail.com',
-          pass: 'vit_cc_tech.'
-        },
+       service: 'zoho',
+          // host: 'smtp.zoho.eu',
+           secure:false,
+           port:3000,
+           auth: {
+             user: 'tech.renaissance18@zoho.com',
+             pass: 'U9zSZwfW6T:UB36'
+           },
         tls: {
           rejectUnauthorised: false
         }
       });
       var mailOptions = {
         to: user.email,
-        from: 'tech.renaissance18@gmail.com',
+        from: 'tech.renaissance18@zoho.com',
         subject: 'Your password has been changed',
         text: 'Hello,\n\n' +
           'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
